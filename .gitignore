@@ -1,3 +1,7 @@
+# IntelliJ
+.idea/
+
+# ignore ruby files
 *.rbc
 capybara-*.html
 .rspec
