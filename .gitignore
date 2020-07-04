@@ -1,5 +1,6 @@
 # IntelliJ
 .idea/
+*.iml
 
 # ignore ruby files
 *.rbc
