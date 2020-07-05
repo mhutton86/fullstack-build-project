@@ -1,5 +1,5 @@
 #!/bin/bash
-# This script is for running a development environment of the rails application
+# This script is for provisioning a fresh development environment
 
 # Get script's directory.
 # "It will work as long as the last component of the path used to find the script is not a
@@ -9,5 +9,8 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # Navigate to development docker environment directory
 cd "${DIR}/../docker/development" || exit
-docker-compose up --build -d
-docker-compose logs -f
+
+# Create and populate the database
+docker-compose run web rake db:create
+docker-compose run web rake db:migrate
+docker-compose run web rake db:seed

@@ -2,3 +2,8 @@ Home Page:
 
 <%= @message %>
 
+<% @posts.each do |post| %>
+  <h1> <%= post.title %> </h1>
+  <h2> <%= post.author.name %> </h2>
+  <p> <%= post.body %>
+<% end %>
