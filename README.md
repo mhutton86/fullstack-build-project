@@ -5,6 +5,10 @@ The "Udacity: Cloud DevOps Engineer" Capstone Project.
 
 ## Instructions
 
+### TODO
+- Add section about scripts.
+- Add section about expected workflow.
+
 ### Install prerequisites
 - Docker 19.x
 - Docker Compose 1.26.x
