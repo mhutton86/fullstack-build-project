@@ -1,0 +1,8 @@
+# Git
+.git
+
+# IntelliJ
+.idea
+**/*.iml
+
+# Other

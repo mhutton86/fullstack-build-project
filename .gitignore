@@ -1,6 +1,9 @@
-# IntelliJ
+# IntelliJ ignores
 .idea/
 *.iml
+
+# Docker and Docker Compose ignores
+docker-compose.override.yml
 
 # Ignore the rails schema. It'll be different per user/env
 db/schema.rb
