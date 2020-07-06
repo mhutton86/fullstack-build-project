@@ -1,7 +1,7 @@
 pipeline {
 	agent any
 	options {
-		withAWS(credentials:'aws-static',region:'us-west-2')
+		withAWS(credentials:'aws-jenkins',region:'us-west-2')
 	}
 	stages {
 		stage('Lint HTML') {
