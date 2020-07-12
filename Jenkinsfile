@@ -4,9 +4,14 @@ pipeline {
 		withAWS(credentials:'aws-jenkins',region:'us-west-2')
 	}
 	stages {
-		stage('Lint HTML') {
+// 		stage('Lint HTML') {
+// 			steps {
+// 				sh 'tidy -q -e *.html'
+// 			}
+// 		}
+		stage('Build, run, provision the Docker environment') {
 			steps {
-				sh 'tidy -q -e *.html'
+				sh 'make fresh-start'
 			}
 		}
 		stage('Upload to AWS') {
