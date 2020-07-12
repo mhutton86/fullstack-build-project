@@ -17,7 +17,9 @@ pipeline {
 		stage('Deploy container to registry') {
 			steps {
 				// Docker Push Step 1: Authenticate
-				// EG: cat ~/GH_TOKEN.txt | docker login docker.pkg.github.com -u mhutton86 --password-stdin
+				// If you run into the error: "Error saving credentials: error storing credentials - err: exit status 1, out: Cannot autolaunch D-Bus without X11 $DISPLAY"
+				// Perform the following on the jenkins server: sudo apt install pass gnupg2
+				// Reference: https://anto.online/guides/cannot-autolaunch-d-bus-without-x11-display/
 				withDockerRegistry(url: "https://docker.pkg.github.com", credentialsId:"github-mhutton86") {
 // 					steps {
 						// Docker Push Step 2: Tag
