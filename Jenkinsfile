@@ -28,17 +28,17 @@ pipeline {
 				}
 			}
 		}
-		stage('Application Test') {
-			steps {
-				script {
-					try {
-						sh 'make test-docker-env'
-					} finally {
-						sh 'make stop-docker-env'
-					}
-				}
-			}
-		}
+// 		stage('Application Test') {
+// 			steps {
+// 				script {
+// 					try {
+// 						sh 'make test-docker-env'
+// 					} finally {
+// 						sh 'make stop-docker-env'
+// 					}
+// 				}
+// 			}
+// 		}
 		stage('Deploy container to registry') {
 			steps {
 				// Docker Push Step 1: Authenticate
