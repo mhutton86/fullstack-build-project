@@ -2,6 +2,14 @@ pipeline {
 	agent any
 	options {
 		withAWS(credentials:'aws-jenkins',region:'us-west-2')
+		buildDiscarder(
+			logRotator(
+			  artifactDaysToKeepStr: '',
+			  artifactNumToKeepStr: '',
+			  daysToKeepStr: '60',
+			  numToKeepStr: '10',
+			)
+		)
 	}
 	properties([
       // only keep 10 builds to prevent disk usage from growing out of control
