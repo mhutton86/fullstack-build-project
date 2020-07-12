@@ -11,17 +11,6 @@ pipeline {
 			)
 		)
 	}
-	properties([
-      // only keep 10 builds to prevent disk usage from growing out of control
-      buildDiscarder(
-        logRotator(
-          artifactDaysToKeepStr: '',
-          artifactNumToKeepStr: '',
-          daysToKeepStr: '60',
-          numToKeepStr: '10',
-        ),
-      ),
-    ])
 	stages {
 		stage('Lint App') {
 			steps {
