@@ -7,7 +7,7 @@ services:
     environment:
       POSTGRES_PASSWORD: password
   web:
-    build: ../../
+    image: "mhutton86/rails-sidekiq-like-webapp:latest"
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
     volumes:
       - /data/test/logs:/myapp/log
@@ -24,7 +24,7 @@ services:
     volumes:
       - ../../tmp/db:/var/lib/redis/data
   sidekiq:
-    build: ../../
+    image: "mhutton86/rails-sidekiq-like-webapp:latest"
     command: 'bundle exec sidekiq'
     volumes:
       - /data/test/logs:/myapp/log
