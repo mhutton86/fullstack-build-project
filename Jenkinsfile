@@ -18,7 +18,7 @@ pipeline {
 			steps {
 				// Docker Push Step 1: Authenticate
 				// EG: cat ~/GH_TOKEN.txt | docker login docker.pkg.github.com -u mhutton86 --password-stdin
-				withDockerRegistry(registryUrl: "docker.pkg.github.com", credentialsId:"github-mhutton86") {
+				withDockerRegistry(url: "docker.pkg.github.com", credentialsId:"github-mhutton86") {
 					// Docker Push Step 2: Tag
 					// EG: docker tag IMAGE_ID docker.pkg.github.com/mhutton86/repository-name/IMAGE_NAME:VERSION
 					sh 'make push-docker-app'
