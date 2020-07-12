@@ -11,7 +11,4 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd "${DIR}/../docker/development" || exit
 
 # Tear down the docker compose environment
-docker-compose down
-
-# Delete the database. Use sudo, as it keeps being created as owned by root.
-sudo rm -rf "${DIR}/../tmp/db"
+docker-compose down --volumes

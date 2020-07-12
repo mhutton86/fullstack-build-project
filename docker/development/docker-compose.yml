@@ -3,14 +3,14 @@ services:
   db:
     image: postgres
     volumes:
-      - ../../tmp/db:/var/lib/postgresql/data
+      - db-root:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: password
   web:
     image: "mhutton86/rails-sidekiq-like-webapp:latest"
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
     volumes:
-      - /data/test/logs:/myapp/log
+      - webapp-logs:/myapp/log
     environment:
       RAILS_ENV: "development"
       REDIS_URL: "redis://redis:6379/12"
@@ -22,15 +22,19 @@ services:
   redis:
     image: redis
     volumes:
-      - ../../tmp/db:/var/lib/redis/data
+      - db-root:/var/lib/redis/data
   sidekiq:
     image: "mhutton86/rails-sidekiq-like-webapp:latest"
     command: 'bundle exec sidekiq'
     volumes:
-      - /data/test/logs:/myapp/log
+      - webapp-logs:/myapp/log
     environment:
       RAILS_ENV: "development"
       REDIS_URL: "redis://redis:6379/12"
     depends_on:
       - db
       - redis
+
+volumes:
+  db-root:
+  webapp-logs:
