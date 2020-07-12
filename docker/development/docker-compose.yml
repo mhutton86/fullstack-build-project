@@ -7,7 +7,7 @@ services:
     environment:
       POSTGRES_PASSWORD: password
   web:
-    image: "mhutton86/rails-sidekiq-like-webapp:latest"
+    image: "rails-sidekiq-like-webapp:${APP_DOCKER_IMAGE_VERSION}"
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
     volumes:
       - webapp-logs:/myapp/log
@@ -15,7 +15,7 @@ services:
       RAILS_ENV: "development"
       REDIS_URL: "redis://redis:6379/12"
     ports:
-      - "3000:3000"
+      - "${APP_WEB_PORT}:3000"
     depends_on:
       - db
       - redis
@@ -24,7 +24,7 @@ services:
     volumes:
       - db-root:/var/lib/redis/data
   sidekiq:
-    image: "mhutton86/rails-sidekiq-like-webapp:latest"
+    image: "rails-sidekiq-like-webapp:${APP_DOCKER_IMAGE_VERSION}"
     command: 'bundle exec sidekiq'
     volumes:
       - webapp-logs:/myapp/log
