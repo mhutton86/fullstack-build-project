@@ -11,19 +11,23 @@ pipeline {
 		}
 		stage('Build, run, provision Docker environment') {
 			steps {
-				try {
-					sh 'make fresh-start'
-				} finally {
-					sh 'make stop-docker-env'
+				script {
+					try {
+						sh 'make fresh-start'
+					} finally {
+						sh 'make stop-docker-env'
+					}
 				}
 			}
 		}
 		stage('Application Test') {
 			steps {
-				try {
-					sh 'make test-docker-env'
-				} finally {
-					sh 'make stop-docker-env'
+				script {
+					try {
+						sh 'make test-docker-env'
+					} finally {
+						sh 'make stop-docker-env'
+					}
 				}
 			}
 		}
