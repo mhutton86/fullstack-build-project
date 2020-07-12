@@ -11,11 +11,6 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 # shellcheck source=./docker-image-meta.sh
 . "${DIR}/docker-image-meta.sh"
 
-# Step 1:
-# Tag the local test image with an external tag
-docker tag "${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION}" \
-  "${DOCKER_REPO_URL}/${DOCKER_REPO_USER}/${DOCKER_REPO_NAME}/${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION}"
-
-# Step 2:
-# Push image to docker repo
-docker push "${DOCKER_REPO_URL}/${DOCKER_REPO_USER}/${DOCKER_REPO_NAME}/${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION}"
+# Navigate to development docker environment directory
+cd "${DIR}/../docker/development" || exit
+docker-compose run web rails test

@@ -4,14 +4,27 @@ pipeline {
 		withAWS(credentials:'aws-jenkins',region:'us-west-2')
 	}
 	stages {
-// 		stage('Lint HTML') {
-// 			steps {
-// 				sh 'tidy -q -e *.html'
-// 			}
-// 		}
+		stage('Lint App') {
+			steps {
+				sh 'make lint-app'
+			}
+		}
 		stage('Build, run, provision Docker environment') {
 			steps {
-				sh 'make fresh-start'
+				try {
+					sh 'make fresh-start'
+				} finally {
+					sh 'make stop-docker-env'
+				}
+			}
+		}
+		stage('Application Test') {
+			steps {
+				try {
+					sh 'make test-docker-env'
+				} finally {
+					sh 'make stop-docker-env'
+				}
 			}
 		}
 		stage('Deploy container to registry') {
@@ -21,18 +34,11 @@ pipeline {
 				// Perform the following on the jenkins server: sudo apt install pass gnupg2
 				// Reference: https://anto.online/guides/cannot-autolaunch-d-bus-without-x11-display/
 				withDockerRegistry(url: "https://docker.pkg.github.com", credentialsId:"github-mhutton86") {
-// 					steps {
-						// Docker Push Step 2: Tag
-						// EG: docker tag IMAGE_ID docker.pkg.github.com/mhutton86/repository-name/IMAGE_NAME:VERSION
-						sh 'make push-docker-app'
-// 					}
+					// Docker Push Step 2: Tag
+					// EG: docker tag IMAGE_ID docker.pkg.github.com/mhutton86/repository-name/IMAGE_NAME:VERSION
+					sh 'make push-docker-app'
 				}
 			}
 		}
-// 		stage('Upload to AWS') {
-// 			steps {
-// 				s3Upload(file:'index.html', bucket:'udacity-devops-jenkins-static')
-// 			}
-// 		}
 	}
 }

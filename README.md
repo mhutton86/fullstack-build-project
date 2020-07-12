@@ -10,7 +10,7 @@ The "Udacity: Cloud DevOps Engineer" Capstone Project.
 ## Development (Docker)
 ### First-time Setup
 1. Build and run the docker image. Can be called subsequently.
-    - `./scripts/run-docker-dev-env.sh`
+    - `make run-docker-dev-env`
     - _Note: You may require calling this with a sudo. Docker Compose doesn't always run with the same privelidges that Docker does._
 1. Provision development data. This only needs to be run once against a fresh environment.
     - `./scripts/provision-docker-dev-env.sh`
@@ -23,6 +23,7 @@ The "Udacity: Cloud DevOps Engineer" Capstone Project.
 1. TODO
 
 ## Install prerequisites
+- Make
 - Docker 19.x
 - Docker Compose 1.26.x
 - Ruby 2.7.x
