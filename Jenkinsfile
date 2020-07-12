@@ -9,15 +9,26 @@ pipeline {
 // 				sh 'tidy -q -e *.html'
 // 			}
 // 		}
-		stage('Build, run, provision the Docker environment') {
+		stage('Build, run, provision Docker environment') {
 			steps {
 				sh 'make fresh-start'
 			}
 		}
-		stage('Upload to AWS') {
+		stage('Deploy container to registry') {
 			steps {
-				s3Upload(file:'index.html', bucket:'udacity-devops-jenkins-static')
+				// Docker Push Step 1: Authenticate
+				// EG: cat ~/GH_TOKEN.txt | docker login docker.pkg.github.com -u mhutton86 --password-stdin
+				withDockerRegistry("docker.pkg.github.com", "github-mhutton86") {
+					// Docker Push Step 2: Tag
+					// EG: docker tag IMAGE_ID docker.pkg.github.com/mhutton86/repository-name/IMAGE_NAME:VERSION
+					sh 'make push-docker-app'
+				}
 			}
 		}
+// 		stage('Upload to AWS') {
+// 			steps {
+// 				s3Upload(file:'index.html', bucket:'udacity-devops-jenkins-static')
+// 			}
+// 		}
 	}
 }

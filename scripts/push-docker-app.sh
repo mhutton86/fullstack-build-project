@@ -12,9 +12,10 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 . "${DIR}/docker-image-meta.sh"
 
 # Step 1:
-# Build image and add a descriptive tag
-docker build --tag="${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION}" "${DIR}/../"
+# Tag the image with an external tag
+docker tag "${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION}" \
+  "${DOCKER_REPO_URL}/${DOCKER_REPO_USER}/${DOCKER_REPO_NAME}/${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION}"
 
 # Step 2:
-# List docker images
-docker image ls
+# Push image to docker repo
+docker push "${DOCKER_REPO_URL}/${DOCKER_REPO_USER}/${DOCKER_REPO_NAME}/${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION}"
