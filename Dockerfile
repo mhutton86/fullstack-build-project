@@ -3,9 +3,9 @@ FROM ruby:2.7.1-slim
 
 # install rails dependencies
 # hadolint ignore=DL3008
-RUN aptapt-get update -qq \
+RUN apt-get update -qq \
 	&& apt-get install --no-install-recommends -y build-essential libpq-dev nodejs libsqlite3-dev \
-	&& aptapt-get clean \
+	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/*
 
 # create a folder /myapp in the docker container and go into that folder
@@ -17,7 +17,7 @@ COPY Gemfile /myapp/Gemfile
 COPY Gemfile.lock /myapp/Gemfile.lock
 
 # Run bundle install to install gems inside the gemfile
-RUN bundle install && bundle clean --force
+RUN bundle install --jobs=5 && bundle clean --force
 
 # Copy the whole app
 COPY . /myapp
