@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.18.0 (06a2e56)
+  labels:
+    io.kompose.service: redis
+    app: redis
+  name: redis
+spec:
+  selector:
+    matchLabels:
+      app: redis
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.service: redis
+        app: redis
+    spec:
+      containers:
+      - image: redis
+        name: redis
+        ports:
+          - containerPort: 6379
+        resources: {}
+        volumeMounts:
+        - mountPath: /var/lib/redis/data
+          name: db-root
+      restartPolicy: Always
+      volumes:
+      - name: db-root
+        persistentVolumeClaim:
+          claimName: db-root
+status: {}
