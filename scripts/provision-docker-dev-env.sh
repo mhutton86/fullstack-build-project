@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -xe
 # This script is for provisioning a fresh development environment
 
 # Get script's directory.

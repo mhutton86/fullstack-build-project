@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -xe
 # This script is for running a development environment of the rails application
 
 # Get script's directory.

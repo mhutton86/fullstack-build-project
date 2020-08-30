@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -xe
 # This script is for defining the docker image meta
 
 # docker image meta

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -xe
 # This script is for building the docker image
 
 # Get script's directory.
