@@ -51,5 +51,5 @@ spec:
         persistentVolumeClaim:
           claimName: webapp-logs
       imagePullSecrets:
-        - name: github-docker
+        - name: registry-secret
 status: {}

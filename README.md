@@ -3,8 +3,8 @@ The "Udacity: Cloud DevOps Engineer" Capstone Project.
 
 # Description
 
-# TODO
-- TODO DELETEME
+# Prerequisites
+- [eksctl](https://eksctl.io/introduction/#installation)
 
 # Workflows
 ## Development (Docker)
@@ -13,11 +13,11 @@ The "Udacity: Cloud DevOps Engineer" Capstone Project.
     - `make run-docker-dev-env`
     - _Note: You may require calling this with a sudo. Docker Compose doesn't always run with the same privelidges that Docker does._
 1. Provision development data. This only needs to be run once against a fresh environment.
-    - `./scripts/provision-docker-dev-env.sh`
+    - `./scripts/docker-provision-dev-env.sh`
 
 ### Reset development environment and data
 1. Tear down the development environment and scrub the data. This should, NEVER, be run against production.
-    - `./scripts/reset-docker-dev-env.sh`
+    - `./scripts/docker-reset-dev-env.sh`
 
 ## Production
 1. TODO
