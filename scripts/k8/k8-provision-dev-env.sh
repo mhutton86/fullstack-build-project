@@ -15,4 +15,4 @@ source "${SCRIPT_DIR}/.k8-base.sh"
 # get access to one of the web instances
 
 # call the provisioning script
-kubectl exec -ti web-bf5cc76f-xmcjq -- "scripts/rails-provision-dev.sh"
+kubectl exec -ti web-bf5cc76f-xmcjq -- "scripts/rails/rails-provision-dev.sh"
