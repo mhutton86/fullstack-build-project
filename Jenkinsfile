@@ -54,7 +54,10 @@ pipeline {
 		}
 		stage('Update Kubernetes cluster w/ latest build') {
 			steps {
-				sh 'make update-k8-cluster'
+				sh '''
+				echo $KUBECONFIG
+				make update-k8-cluster
+				'''
 			}
 		}
 	}

@@ -52,7 +52,7 @@ The "Udacity: Cloud DevOps Engineer" Capstone Project.
 - pass 
 - gnupg2
 - awscli (configuration at ~jenkins/.aws/config & ~jenkins/.aws/credentials)
-- kubectl (configuration at ~jenkins/.kube/config)
+- kubectl (configuration at ~jenkins/.kube/config, ID: kubeconfig)
 
 # References
 1. This article was used for creating Rails, Sidekiq, and Postgres environment on docker 
