@@ -55,9 +55,10 @@ pipeline {
 		stage('Update Kubernetes cluster w/ latest build') {
 			steps {
 				sh '''
+				export $KUBECONFIG
 				echo $KUBECONFIG
 				cat $KUBECONFIG
-				kubectl config
+				kubectl config --current-context
 				make update-k8-cluster
 				'''
 			}
