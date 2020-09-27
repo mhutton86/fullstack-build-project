@@ -55,7 +55,7 @@ pipeline {
 		stage('Update Kubernetes cluster w/ latest build') {
 			steps {
 				sh '''
-				export $KUBECONFIG
+				export KUBECONFIG
 				echo $KUBECONFIG
 				cat $KUBECONFIG
 				kubectl config --current-context
