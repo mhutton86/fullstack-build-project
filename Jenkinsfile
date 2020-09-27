@@ -58,7 +58,8 @@ pipeline {
 				export KUBECONFIG
 				echo $KUBECONFIG
 				cat $KUBECONFIG
-				kubectl config --current-context
+				kubectl config current-context
+				kubectl config --kubeconfig $KUBECONFIG
 				make update-k8-cluster
 				'''
 			}
