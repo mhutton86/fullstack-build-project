@@ -1,5 +1,5 @@
 #!/bin/bash -xe
-# This script is for resetting a development environment of the rails application
+# This script is for stopping the development environment of the rails application
 
 # Get script's directory.
 # "It will work as long as the last component of the path used to find the script is not a
@@ -8,7 +8,6 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # Navigate to development docker environment directory
-cd "${DIR}/../docker/development" || exit
+cd "${DIR}/../../docker/development" || exit
 
-# Tear down the docker compose environment
-docker-compose down --volumes
+docker-compose stop

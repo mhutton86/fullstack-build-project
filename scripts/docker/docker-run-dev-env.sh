@@ -8,5 +8,6 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # Navigate to development docker environment directory
-cd "${DIR}/../docker/development" || exit
+cd "${DIR}/../../docker/development" || exit
+
 docker-compose up --build -d

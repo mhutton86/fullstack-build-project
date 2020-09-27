@@ -8,9 +8,13 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # Source the docker image info
-# shellcheck source=./docker-image-meta.sh
+# shellcheck source=./.docker-base.sh
 . "${DIR}/docker-image-meta.sh"
 
-# Navigate to development docker environment directory
-cd "${DIR}/../docker/development" || exit
-docker-compose run web rails test
+# Step 1:
+# Build image and add a descriptive tag
+docker build --tag="${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION}" "${DIR}/../../"
+
+# Step 2:
+# List docker images
+docker image ls

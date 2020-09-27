@@ -8,8 +8,8 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 # Source the docker image info
-# shellcheck source=./docker-image-meta.sh
-. "${DIR}/docker-image-meta.sh"
+# shellcheck source=./.docker-base.sh
+. "${DIR}/.docker-base.sh"
 
 # Step 1:
 # Tag the local test image with an external tag

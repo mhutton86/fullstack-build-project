@@ -1,5 +1,5 @@
 #!/bin/bash -xe
-# This script is for provisioning a fresh development environment
+# This script is for building the docker image
 
 # Get script's directory.
 # "It will work as long as the last component of the path used to find the script is not a
@@ -7,10 +7,10 @@
 # Ref: https://stackoverflow.com/questions/59895/how-to-get-the-source-directory-of-a-bash-script-from-within-the-script-itself
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-# Navigate to development docker environment directory
-cd "${DIR}/../docker/development" || exit
+# Source the docker image info
+# shellcheck source=./.docker-base.sh
+. "${DIR}/.docker-base.sh"
 
-# Create and populate the database
-docker-compose run web rake db:create
-docker-compose run web rake db:migrate
-docker-compose run web rake db:seed
+# Navigate to development docker environment directory
+cd "${DIR}/../../docker/development" || exit
+docker-compose run web rails test

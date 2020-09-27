@@ -1,4 +1,6 @@
 #!/bin/bash -xe
+# These are general commands, and we don't want this to be run.
+exit 1;
 CLUSTER_NAME=cluster-1
 AWS_REGION=us-west-2
 NUMBER_NODES=4

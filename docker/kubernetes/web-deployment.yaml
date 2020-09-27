@@ -1,26 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.cmd: kompose convert
-    kompose.version: 1.18.0 (06a2e56)
-  creationTimestamp: null
   labels:
     io.kompose.service: web
+    version: ${RAILS_APP_CONTAINER_VERSION}
   name: web
 spec:
   selector:
     matchLabels:
       app: webapp
-  replicas: 1
+      version: ${RAILS_APP_CONTAINER_VERSION}
+  replicas: 2
   strategy:
-    type: Recreate
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 50%
+      maxSurge: 50%
   template:
     metadata:
-      creationTimestamp: null
       labels:
         io.kompose.service: web
         app: webapp
+        version: ${RAILS_APP_CONTAINER_VERSION}
     spec:
       containers:
       - args:
@@ -37,11 +38,12 @@ spec:
           value: development
         - name: REDIS_URL
           value: redis://redis:6379/12
-        image: docker.pkg.github.com/mhutton86/fullstack-build-project/rails-sidekiq-like-webapp:1.0.0
         name: web
+        # RAILS_APP_CONTAINER_VERSION is replaced using envsubst in our K8 scripts
+        image: docker.pkg.github.com/mhutton86/fullstack-build-project/rails-sidekiq-like-webapp:${RAILS_APP_CONTAINER_VERSION}
+        imagePullPolicy: Always
         ports:
         - containerPort: 3000
-        resources: {}
         volumeMounts:
         - mountPath: /myapp/log
           name: webapp-logs
@@ -52,4 +54,3 @@ spec:
           claimName: webapp-logs
       imagePullSecrets:
         - name: registry-secret
-status: {}

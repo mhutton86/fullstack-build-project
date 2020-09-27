@@ -7,20 +7,26 @@ metadata:
   creationTimestamp: null
   labels:
     io.kompose.service: sidekiq
+    version: ${RAILS_APP_CONTAINER_VERSION}
   name: sidekiq
 spec:
   selector:
     matchLabels:
       app: sidekiq
-  replicas: 1
+      version: ${RAILS_APP_CONTAINER_VERSION}
+  replicas: 2
   strategy:
-    type: Recreate
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 50%
+      maxSurge: 50%
   template:
     metadata:
       creationTimestamp: null
       labels:
         io.kompose.service: sidekiq
         app: sidekiq
+        version: ${RAILS_APP_CONTAINER_VERSION}
     spec:
       containers:
       - args:
@@ -32,9 +38,10 @@ spec:
           value: development
         - name: REDIS_URL
           value: redis://$(REDIS_SERVICE_HOST):$(REDIS_SERVICE_PORT)/12
-        image: docker.pkg.github.com/mhutton86/fullstack-build-project/rails-sidekiq-like-webapp:1.0.0
+        # RAILS_APP_CONTAINER_VERSION is replaced using envsubst in our K8 scripts
         name: sidekiq
-        resources: {}
+        image: docker.pkg.github.com/mhutton86/fullstack-build-project/rails-sidekiq-like-webapp:${RAILS_APP_CONTAINER_VERSION}
+        imagePullPolicy: Always
         volumeMounts:
         - mountPath: /myapp/log
           name: webapp-logs
