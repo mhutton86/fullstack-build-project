@@ -56,6 +56,8 @@ pipeline {
 			steps {
 				sh '''
 				echo $KUBECONFIG
+				cat $KUBECONFIG
+				kubectl config
 				make update-k8-cluster
 				'''
 			}
