@@ -24,4 +24,7 @@ lint-app:
 test-docker-env: run-docker-env
 	"scripts/docker/docker-test-rails.sh"
 
+update-k8-cluster:
+	"scripts/k8/k8-apply-config.sh"
+
 fresh-start: reset-docker-env build-docker-app run-docker-env provision-docker-env stop-docker-env

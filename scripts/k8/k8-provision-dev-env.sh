@@ -13,6 +13,8 @@ echo "Loading the K8 base script"
 source "${SCRIPT_DIR}/.k8-base.sh"
 
 # get access to one of the web instances
+POD=$(kubectl get pods --selector=version="${RAILS_APP_CONTAINER_VERSION},app=webapp" -o jsonpath="{.items[0].metadata.name}")
 
 # call the provisioning script
-kubectl exec -ti web-bf5cc76f-xmcjq -- "scripts/rails/rails-provision-dev.sh"
+echo "Provisioning the new Webapp pod '${POD}', version '${RAILS_APP_CONTAINER_VERSION}'"
+kubectl exec -ti "${POD}" -- "scripts/rails/rails-provision-dev.sh"

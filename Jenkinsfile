@@ -52,5 +52,10 @@ pipeline {
 				}
 			}
 		}
+		stage('Update Kubernetes cluster w/ latest build') {
+			steps {
+				sh 'make update-k8-cluster'
+			}
+		}
 	}
 }

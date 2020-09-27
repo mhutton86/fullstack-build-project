@@ -23,12 +23,36 @@ The "Udacity: Cloud DevOps Engineer" Capstone Project.
 1. TODO
 
 ## Install prerequisites
+### Application
 - Make
 - Docker 19.x
 - Docker Compose 1.26.x
+- `kubectl` v1.17.x 
+- `eksctl` v0.27.x
 - Ruby 2.7.x
 - Rails 5.2.x
 - libpg-dev
+
+### Jenkins
+#### Configuration
+- Set up AWS credentials (id: `aws-jenkins`)
+- Set up Docker credentials (id: `github-mhutton86`)
+- Set up Kubeconfig credentials
+
+#### Plugins
+- Blue Ocean
+- CloudBees Docker Build and Publish plugin
+- Kubernetes Continuous Deploy Plugin
+- Pipeline: AWS Steps
+
+#### Server
+- Docker
+- Docker Compose
+- Make
+- pass 
+- gnupg2
+- awscli (configuration at ~jenkins/.aws/config & ~jenkins/.aws/credentials)
+- kubectl (configuration at ~jenkins/.kube/config)
 
 # References
 1. This article was used for creating Rails, Sidekiq, and Postgres environment on docker 
