@@ -55,12 +55,6 @@ pipeline {
 		stage('Update Kubernetes cluster w/ latest build') {
 			steps {
 				sh '''
-				aws configure list
-				export KUBECONFIG
-				echo $KUBECONFIG
-				cat $KUBECONFIG
-				kubectl config current-context
-				kubectl get nodes -o wide
 				make update-k8-cluster
 				'''
 			}
