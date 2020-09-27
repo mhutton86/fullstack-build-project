@@ -1,10 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.cmd: kompose convert
-    kompose.version: 1.18.0 (06a2e56)
-  creationTimestamp: null
   labels:
     io.kompose.service: sidekiq
     version: ${RAILS_APP_CONTAINER_VERSION}
@@ -13,7 +9,6 @@ spec:
   selector:
     matchLabels:
       app: sidekiq
-      version: ${RAILS_APP_CONTAINER_VERSION}
   replicas: 2
   strategy:
     type: RollingUpdate
@@ -22,7 +17,6 @@ spec:
       maxSurge: 50%
   template:
     metadata:
-      creationTimestamp: null
       labels:
         io.kompose.service: sidekiq
         app: sidekiq

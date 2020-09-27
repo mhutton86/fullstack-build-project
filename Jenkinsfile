@@ -59,7 +59,7 @@ pipeline {
 				echo $KUBECONFIG
 				cat $KUBECONFIG
 				kubectl config current-context
-				#kubectl config --kubeconfig $KUBECONFIG
+				kubectl get nodes -o wide
 				make update-k8-cluster
 				'''
 			}

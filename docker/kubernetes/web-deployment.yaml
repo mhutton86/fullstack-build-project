@@ -9,7 +9,6 @@ spec:
   selector:
     matchLabels:
       app: webapp
-      version: ${RAILS_APP_CONTAINER_VERSION}
   replicas: 2
   strategy:
     type: RollingUpdate
@@ -37,9 +36,9 @@ spec:
         - name: RAILS_ENV
           value: development
         - name: REDIS_URL
-          value: redis://redis:6379/12
-        name: web
+          value: redis://$(REDIS_SERVICE_HOST):$(REDIS_SERVICE_PORT)/12
         # RAILS_APP_CONTAINER_VERSION is replaced using envsubst in our K8 scripts
+        name: web
         image: docker.pkg.github.com/mhutton86/fullstack-build-project/rails-sidekiq-like-webapp:${RAILS_APP_CONTAINER_VERSION}
         imagePullPolicy: Always
         ports:
