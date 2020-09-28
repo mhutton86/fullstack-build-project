@@ -2,10 +2,9 @@
 FROM ruby:2.7.1-slim
 
 # install rails dependencies
-# hadolint ignore=DL3008
 RUN apt-get update -qq \
 	&& apt-get install --no-install-recommends -y build-essential libpq-dev nodejs libsqlite3-dev \
-	&& apt-get clean \
+	&& apt clean \
 	&& rm -rf /var/lib/apt/lists/*
 
 # create a folder /myapp in the docker container and go into that folder
